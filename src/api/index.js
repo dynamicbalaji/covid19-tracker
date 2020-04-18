@@ -49,9 +49,23 @@ export const fetchTNGraphData = async () => {
 
 export const fetchIndiaData = async () => {
     try {
-        const { data } = await axios.get(`${apiUrl}/data.json`);
+        const {data : {statewise}}  = await axios.get(`${apiUrl}/data.json`);
         // const stateData = data.filter((state) => state.state === "Tamil Nadu")
-        console.log("fetchTNData -> response", data);
+        console.log("fetchTNData -> response", statewise);
+        const stateData = statewise.filter((a, b) => a.state!=='Total')
+            .sort((a, b) => parseInt(b.confirmed) - parseInt(a.confirmed))
+            .map(({ state, confirmed, active, recovered,
+                deaths, lastupdatedtime}) => {
+                return {
+                    stateName: state,
+                    confirmed: parseInt(confirmed),
+                    active: parseInt(active),
+                    recovered: parseInt(recovered),
+                    deaths: parseInt(deaths),
+                    lastUpdated: lastupdatedtime
+                }
+            });
+        return stateData;
     } catch (error) {
         console.log("fetchTNData -> error", error);
     }

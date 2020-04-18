@@ -5,7 +5,7 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
 import Chart from '../Chart/Chart';
-import {fetchTNData, fetchTNGraphData} from '../../api';
+import {fetchTNData, fetchTNGraphData, fetchIndiaData} from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
@@ -24,7 +24,28 @@ const SelectionTabs = () => {
         fetchGraphData();
     }, []);
 
-    const handleChange = (event, newVal) => setValue(newVal);
+    const handleChange = (event, newVal) => {
+        setValue(newVal);
+        if(newVal === 0) {
+            const fetchData = async () => {
+                setData(await fetchTNData());
+            }
+            fetchData();
+            const fetchGraphData = async () => {
+                setGraphData(await fetchTNGraphData());
+            }
+            fetchGraphData();
+        } else if(newVal === 1) {
+            const fetchData = async () => {
+                setData(await fetchIndiaData());
+            }
+            fetchData();
+            // const fetchGraphData = async () => {
+            //     setGraphData(await fetchTNGraphData());
+            // }
+            // fetchGraphData();
+        }
+    };
 
     return (
         <div className="tab-container">

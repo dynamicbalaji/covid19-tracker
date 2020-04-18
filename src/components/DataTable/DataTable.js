@@ -22,12 +22,21 @@ const DataTable = ({ data, value, index }) => {
     const classes = useStyles();
     const [orderBy, setOrderBy] = useState('confirmed');
     const [order, setOrder] = useState('desc');
-    const [lastUpdate, setLastUpdate] = useState('');
+    // const [lastUpdate, setLastUpdate] = useState('');
+    let firstLabel = 'District', lastUpdate ='';
 
     if (value !== index) return null;
 
+    if (index === 1) {
+        firstLabel = 'State/UT';
+        lastUpdate = '';
+    } else if (index === 2) {
+        firstLabel = 'Country';
+        lastUpdate = '';
+    }
+
     const headCells = [
-        { id: 'name', numeric: false, disablePadding: false, label: 'District' },
+        { id: 'name', numeric: false, disablePadding: false, label: firstLabel },
         { id: 'confirmed', numeric: true, disablePadding: false, label: 'Confirmed' },
         { id: 'active', numeric: true, disablePadding: false, label: 'Active' },
         { id: 'recovered', numeric: true, disablePadding: false, label: 'Recovered' },
@@ -44,7 +53,7 @@ const DataTable = ({ data, value, index }) => {
         </TableRow>) :
         stableSort(data, getComparator(order, orderBy))
             .map(({ stateName, confirmed, active, recovered, deaths, lastUpdated }) => {
-                if (!lastUpdate) setLastUpdate(lastUpdated)
+                if (!lastUpdate) lastUpdate = lastUpdated;
                 return (
                     <TableRow key={stateName} hover>
                         <TableCell component="th" scope="row" className="table-cell">
