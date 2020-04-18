@@ -51,7 +51,6 @@ export const fetchIndiaData = async () => {
     try {
         const {data : {statewise}}  = await axios.get(`${apiUrl}/data.json`);
         // const stateData = data.filter((state) => state.state === "Tamil Nadu")
-        console.log("fetchTNData -> response", statewise);
         const stateData = statewise.filter((a, b) => a.state!=='Total')
             .sort((a, b) => parseInt(b.confirmed) - parseInt(a.confirmed))
             .map(({ state, confirmed, active, recovered,
@@ -68,5 +67,24 @@ export const fetchIndiaData = async () => {
         return stateData;
     } catch (error) {
         console.log("fetchTNData -> error", error);
+    }
+}
+
+export const fetchIndiaGraphData = async () => {
+    try {
+        const {data : {cases_time_series}}  = await axios.get(`${apiUrl}/data.json`);
+        // const stateData = data.filter((state) => state.state === "Tamil Nadu")
+        const graphData = cases_time_series
+            .map(({ dailyconfirmed, dailydeceased, dailyrecovered, date}) => {
+                return {
+                    date,
+                    confirmed: parseInt(dailyconfirmed),
+                    recovered: parseInt(dailyrecovered),
+                    deaths: parseInt(dailydeceased),
+                }
+            });
+        return graphData;
+    } catch (error) {
+        console.log("fetchIndiaGraphData -> error", error);
     }
 }

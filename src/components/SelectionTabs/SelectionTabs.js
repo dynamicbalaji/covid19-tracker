@@ -5,7 +5,7 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
 import Chart from '../Chart/Chart';
-import {fetchTNData, fetchTNGraphData, fetchIndiaData} from '../../api';
+import {fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData} from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
@@ -40,10 +40,10 @@ const SelectionTabs = () => {
                 setData(await fetchIndiaData());
             }
             fetchData();
-            // const fetchGraphData = async () => {
-            //     setGraphData(await fetchTNGraphData());
-            // }
-            // fetchGraphData();
+            const fetchGraphData = async () => {
+                setGraphData(await fetchIndiaGraphData());
+            }
+            fetchGraphData();
         }
     };
 
@@ -71,6 +71,7 @@ const SelectionTabs = () => {
                 <DataTable value={value} index={0} data={data} />
                 <Chart value={value} index={0} graphData={graphData} />
                 <DataTable value={value} index={1} data={data} />
+                <Chart value={value} index={1} graphData={graphData} />
                 <DataTable value={value} index={2} data={data} />
             {/* </SwipeableViews> */}
         </div>
