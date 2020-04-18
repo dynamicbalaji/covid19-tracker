@@ -1,0 +1,14 @@
+.datatable-container {
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.paper {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.t-head {
+    font-weight: bold;
+}

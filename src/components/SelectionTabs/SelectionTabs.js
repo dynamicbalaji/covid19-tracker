@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Paper, Tabs, Tab, useTheme } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 
 import './SelectionTabs.css';
+import DataTable from '../DataTable/DataTable';
+import {fetchTNData} from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
+    const [data, setData] = useState([]);
     const theme = useTheme();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setData(await fetchTNData());
+        }
+        fetchData();
+    }, []);
 
     const handleChange = (event, newVal) => setValue(newVal);
 
@@ -30,9 +40,7 @@ const SelectionTabs = () => {
                 index={value}
                 onChangeIndex={handleChange}
             >
-                <span value={value} index={0} dir={theme.direction}>
-                    Item One
-                </span>
+                <DataTable value={value} index={0} dir={theme.direction} data={data} />
                 <span value={value} index={1} dir={theme.direction}>
                     Item Two
                 </span>
