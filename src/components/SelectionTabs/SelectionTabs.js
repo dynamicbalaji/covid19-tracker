@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Tabs, Tab, useTheme } from '@material-ui/core';
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
 
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
@@ -35,19 +35,16 @@ const SelectionTabs = () => {
                     <Tab label="World" />
                 </Tabs>
             </Paper>
-            <SwipeableViews
+            {/* <SwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={value}
                 onChangeIndex={handleChange}
-            >
-                <DataTable value={value} index={0} dir={theme.direction} data={data} />
-                <span value={value} index={1} dir={theme.direction}>
-                    Item Two
-                </span>
-                <span value={value} index={2} dir={theme.direction}>
-                    Item Three
-                </span>
-            </SwipeableViews>
+                className="swipe"
+            > */}
+                <DataTable value={value} index={0} data={data} />
+                <DataTable value={value} index={1} data={data} />
+                <DataTable value={value} index={2} data={data} />
+            {/* </SwipeableViews> */}
         </div>
     );
 }

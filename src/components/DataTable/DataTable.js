@@ -18,21 +18,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, value, index}) => {
     const classes = useStyles();
     const [orderBy, setOrderBy] = useState('confirmed');
     const [order, setOrder] = useState('desc');
     const [lastUpdate, setLastUpdate] = useState('');
 
+    if(value !== index) return null;
+
     const headCells = [
-        { id: 'name', numeric: false, disablePadding: false, label: 'State/UT' },
+        { id: 'name', numeric: false, disablePadding: false, label: 'District' },
         { id: 'confirmed', numeric: true, disablePadding: false, label: 'Confirmed' },
         { id: 'active', numeric: true, disablePadding: false, label: 'Active' },
         { id: 'recovered', numeric: true, disablePadding: false, label: 'Recovered' },
         { id: 'deaths', numeric: true, disablePadding: false, label: 'Deceased' }
     ];
 
-    const tableData = !data.length ? (<Typography variant="button" display="block" align='center'>
+    const tableData = data && !data.length ? (<Typography variant="button" display="block" align='center'>
         Loading...
         </Typography>) :
         stableSort(data, getComparator(order, orderBy))
@@ -40,13 +42,13 @@ const DataTable = ({ data }) => {
                 if (!lastUpdate) setLastUpdate(lastUpdated)
                 return (
                     <TableRow key={stateName} hover>
-                        <TableCell component="th" scope="row">
+                        <TableCell component="th" scope="row" className="table-cell">
                             {stateName}
                         </TableCell>
-                        <TableCell align="right">{confirmed}</TableCell>
-                        <TableCell align="right">{active}</TableCell>
-                        <TableCell align="right">{recovered}</TableCell>
-                        <TableCell align="right">{deaths}</TableCell>
+                        <TableCell align="right" className="table-cell">{confirmed}</TableCell>
+                        <TableCell align="right" className="table-cell">{active}</TableCell>
+                        <TableCell align="right" className="table-cell">{recovered}</TableCell>
+                        <TableCell align="right" className="table-cell">{deaths}</TableCell>
                     </TableRow>
                 )
             });
@@ -75,7 +77,7 @@ const DataTable = ({ data }) => {
                                         align={headCell.numeric ? 'right' : 'left'}
                                         padding={headCell.disablePadding ? 'none' : 'default'}
                                         sortDirection={orderBy === headCell.id ? order : false}
-                                    >
+                                        className="table-cell">
                                         <TableSortLabel
                                             active={orderBy === headCell.id}
                                             direction={orderBy === headCell.id ? order : 'asc'}

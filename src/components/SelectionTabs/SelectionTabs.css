@@ -9,8 +9,20 @@
     width: 50%;
 }
 
+.react-swipeable-view-container>div {
+    overflow: hidden !important;
+}
+
+.datatable {
+    /* width: 10%; */
+}
+
 @media only screen and (max-width: 770px) {
     .tab-style {
       width: 100%;
+    }
+
+    .datatable {
+        /* width: 100% */
     }
 } 
