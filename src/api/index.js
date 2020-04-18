@@ -18,25 +18,38 @@ export const fetchTNData = async () => {
             sqlFormat=none&f=json&token=`);
         const stateData = features.sort((a, b) => b.attributes.Positive_Cases - a.attributes.Positive_Cases)
             .map(({ attributes: { Name, Positive_Cases, Active_Cases, Recovered,
-            Death, Last_Updated_Date } }) => {
+                Death, Last_Updated_Date } }) => {
                 return {
                     stateName: Name,
-                        confirmed: Positive_Cases,
-                            active: Active_Cases,
-                                recovered: Recovered,
-                                    deaths: Death,
-                                        lastUpdated: new Date(Last_Updated_Date).toLocaleString()
+                    confirmed: Positive_Cases,
+                    active: Active_Cases,
+                    recovered: Recovered,
+                    deaths: Death,
+                    lastUpdated: new Date(Last_Updated_Date).toLocaleString()
                 }
-        });
+            });
         return stateData;
     } catch (error) {
         console.log("fetchTNData -> error", error);
     }
 }
 
+export const fetchTNGraphData = async () => {
+    try {
+        const { data: { features } } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/TN_Covid_Date_Wise_PositiveCases/FeatureServer/0/query?where=1%3D1&
+        objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&
+        returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&
+        resultOffset=&resultRecordCount=&sqlFormat=none&f=json&token=`);
+        const graphData = features.map(({ attributes: { Date: dt, Positive_Cases } }) => ({ date: new Date(dt).toLocaleDateString(), confirmed: Positive_Cases }));
+        return graphData;
+    } catch (error) {
+        console.log("fetchTNGraphData -> error", error)
+    }
+}
+
 export const fetchIndiaData = async () => {
     try {
-        const { data } = await axios.get(`${apiUrl}/v2/state_district_wise.json`);
+        const { data } = await axios.get(`${apiUrl}/data.json`);
         // const stateData = data.filter((state) => state.state === "Tamil Nadu")
         console.log("fetchTNData -> response", data);
     } catch (error) {
