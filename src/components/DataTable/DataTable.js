@@ -18,13 +18,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const DataTable = ({ data, value, index}) => {
+const DataTable = ({ data, value, index }) => {
     const classes = useStyles();
     const [orderBy, setOrderBy] = useState('confirmed');
     const [order, setOrder] = useState('desc');
     const [lastUpdate, setLastUpdate] = useState('');
 
-    if(value !== index) return null;
+    if (value !== index) return null;
 
     const headCells = [
         { id: 'name', numeric: false, disablePadding: false, label: 'District' },
@@ -34,9 +34,14 @@ const DataTable = ({ data, value, index}) => {
         { id: 'deaths', numeric: true, disablePadding: false, label: 'Deceased' }
     ];
 
-    const tableData = data && !data.length ? (<Typography variant="button" display="block" align='center'>
-        Loading...
-        </Typography>) :
+    const tableData = data && !data.length ? (
+        <TableRow>
+            <TableCell align="center" colSpan={5}>
+                <Typography variant="button" display="block" align='center'>
+                    Loading...
+                </Typography>
+            </TableCell>
+        </TableRow>) :
         stableSort(data, getComparator(order, orderBy))
             .map(({ stateName, confirmed, active, recovered, deaths, lastUpdated }) => {
                 if (!lastUpdate) setLastUpdate(lastUpdated)
