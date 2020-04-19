@@ -61,16 +61,16 @@ const DataTable = ({ data, value, index }) => {
                             {stateName}
                         </TableCell>
                         <TableCell align="right" className="table-cell">
-                            <CountUp start={0} end={confirmed} duration={2.5} separator="," />
+                            <CountUp start={0} end={confirmed ? confirmed : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
-                            <CountUp start={0} end={active} duration={2.5} separator="," />
+                            <CountUp start={0} end={active ? active : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
-                            <CountUp start={0} end={recovered} duration={2.5} separator="," />
+                            <CountUp start={0} end={recovered ? recovered : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
-                            <CountUp start={0} end={deaths} duration={2.5} separator="," />
+                            <CountUp start={0} end={deaths ? deaths : 0} duration={2.5} separator="," />
                         </TableCell>
                         {/* <TableCell align="right" className="table-cell">{active}</TableCell>
                         <TableCell align="right" className="table-cell">{recovered}</TableCell>
