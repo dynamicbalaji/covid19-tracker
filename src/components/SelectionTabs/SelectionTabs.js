@@ -29,6 +29,7 @@ const SelectionTabs = () => {
 
     const handleChange = (event, newVal) => {
         setValue(newVal);
+        setCountry('');
         if (newVal === 0) {
             const fetchData = async () => {
                 setData(await fetchTNData());

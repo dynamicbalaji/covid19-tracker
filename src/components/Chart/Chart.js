@@ -7,35 +7,35 @@ const Chart = ({ graphData, value, index, country }) => {
     
     if(value !== index) return null;
 
-    let dataset = [], title = '';
+    let dataset = [], title = '', isGraphDataArr = Array.isArray(graphData);
 
     if(index === 0) {
         dataset = [{
-            data: graphData.map(({ confirmed }) => confirmed),
+            data: isGraphDataArr ? graphData.map(({ confirmed }) => confirmed) : [],
             label: 'Confirmed',
             borderColor: '#3333ff',
             fill: true
         }];
         title = `Daily Confirmed Cases Timeline`;
-    } else if (index === 1) {
+    } else if (index === 1 && isGraphDataArr) {
         dataset = [{
-            data: graphData.map(({ confirmed }) => confirmed),
+            data: isGraphDataArr ? graphData.map(({ confirmed }) => confirmed) : [],
             label: 'Confirmed',
             borderColor: 'rgba(0, 0, 255, 0.5)',
             fill: true
         }, {
-            data: graphData.map(({ recovered }) => recovered),
+            data: isGraphDataArr ? graphData.map(({ recovered }) => recovered) : [],
             label: 'Recovered',
             borderColor: 'rgba(0, 255, 0, 0.5)',
             fill: true
         }, {
-            data: graphData.map(({ deaths }) => deaths),
+            data: isGraphDataArr ? graphData.map(({ deaths }) => deaths) : [],
             label: 'Deceased',
             borderColor: 'rgba(255, 0, 0, 0.5)',
             fill: true
         }];
         title = `Daily Cases Timeline`;
-    } else if (index === 2 && Array.isArray(graphData)) {
+    } else if (index === 2 && isGraphDataArr) {
         dataset = [{
             data: graphData.map(({ confirmed }) => confirmed),
             label: 'Confirmed',
@@ -48,7 +48,7 @@ const Chart = ({ graphData, value, index, country }) => {
             fill: true
         }];
         title = `Daily Cases Growth`;
-    } else if (index === 2 && !Array.isArray(graphData)) {
+    } else if (index === 2 && !isGraphDataArr) {
         dataset = [{
             label: 'People',
             backgroundColor: [
