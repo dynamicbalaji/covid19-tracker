@@ -7,7 +7,7 @@ import DataTable from '../DataTable/DataTable';
 import Chart from '../Chart/Chart';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Cards from '../Cards/Cards';
-import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchCntryData } from '../../api';
+import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchCntryData, fetchDailyData } from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
@@ -52,10 +52,10 @@ const SelectionTabs = () => {
                 setData(await fetchCntryData());
             }
             fetchData();
-            // const fetchGraphData = async () => {
-            //     setGraphData(await fetchIndiaGraphData());
-            // }
-            // fetchGraphData();
+            const fetchGraphData = async () => {
+                setGraphData(await fetchDailyData());
+            }
+            fetchGraphData();
         }
     };
 
@@ -90,7 +90,8 @@ const SelectionTabs = () => {
             <DataTable value={value} index={1} data={data} />
             <Chart value={value} index={1} graphData={graphData} />
             <CountryPicker handleCountryChange={handleCountryChange} value={value} index={2} />
-            <Cards data={data} country={country} value={value} index={2} />
+            <Cards data={data} value={value} index={2} />
+            <Chart value={value} index={2} graphData={graphData} country={country} />
             {/* </SwipeableViews> */}
         </div>
     );

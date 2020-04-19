@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 
 import './Chart.css';
 
-const Chart = ({ graphData, value, index }) => {
+const Chart = ({ graphData, value, index, country }) => {
     
     if(value !== index) return null;
 
@@ -35,8 +35,18 @@ const Chart = ({ graphData, value, index }) => {
         }];
         title = `Daily Cases Timeline`;
     } else if (index === 2) {
-        dataset = 'Country';
-        title = '';
+        dataset = [{
+            data: graphData.map(({ confirmed }) => confirmed),
+            label: 'Confirmed',
+            borderColor: 'rgba(0, 0, 255, 0.5)',
+            fill: true
+        }, {
+            data: graphData.map(({ deaths }) => deaths),
+            label: 'Deceased',
+            borderColor: 'rgba(255, 0, 0, 0.5)',
+            fill: true
+        }];
+        title = `Daily Cases Growth`;
     }
 
     const lineChart = (
