@@ -37,7 +37,7 @@ const DataTable = ({ data, value, index }) => {
     }
 
     const headCells = [
-        { id: 'name', numeric: false, disablePadding: false, label: firstLabel },
+        { id: 'stateName', numeric: false, disablePadding: false, label: firstLabel },
         { id: 'confirmed', numeric: true, disablePadding: false, label: 'Confirmed' },
         { id: 'active', numeric: true, disablePadding: false, label: 'Active' },
         { id: 'recovered', numeric: true, disablePadding: false, label: 'Recovered' },
