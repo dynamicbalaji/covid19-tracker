@@ -1,5 +1,5 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 
 import './Chart.css';
 
@@ -7,16 +7,17 @@ const Chart = ({ graphData, value, index, country }) => {
     
     if(value !== index) return null;
 
-    let dataset = [{
-        data: graphData.map(({ confirmed }) => confirmed),
-        label: 'Confirmed',
-        borderColor: '#3333ff',
-        fill: true
-    }];
+    let dataset = [], title = '';
 
-    let title = `Daily Confirmed Cases Timeline`;
-
-    if (index === 1) {
+    if(index === 0) {
+        dataset = [{
+            data: graphData.map(({ confirmed }) => confirmed),
+            label: 'Confirmed',
+            borderColor: '#3333ff',
+            fill: true
+        }];
+        title = `Daily Confirmed Cases Timeline`;
+    } else if (index === 1) {
         dataset = [{
             data: graphData.map(({ confirmed }) => confirmed),
             label: 'Confirmed',
@@ -34,7 +35,7 @@ const Chart = ({ graphData, value, index, country }) => {
             fill: true
         }];
         title = `Daily Cases Timeline`;
-    } else if (index === 2) {
+    } else if (index === 2 && Array.isArray(graphData)) {
         dataset = [{
             data: graphData.map(({ confirmed }) => confirmed),
             label: 'Confirmed',
@@ -47,6 +48,16 @@ const Chart = ({ graphData, value, index, country }) => {
             fill: true
         }];
         title = `Daily Cases Growth`;
+    } else if (index === 2 && !Array.isArray(graphData)) {
+        dataset = [{
+            label: 'People',
+            backgroundColor: [
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(255, 0, 0, 0.5)'],
+            data: [graphData.confirmed.value, graphData.recovered.value, graphData.deaths.value]
+        }];
+        title = `Current status in ${country}`;
     }
 
     const lineChart = (
@@ -60,9 +71,20 @@ const Chart = ({ graphData, value, index, country }) => {
             }}/> : null
     );
 
+    const barChart = graphData.confirmed ?
+        <Bar
+            data={{
+                labels: ['Confirmed', 'Recovered', 'Deceased'],
+                datasets: dataset
+            }}
+            options={{
+                legend: { display: false },
+                title: { display: true, text: title }
+            }} /> : null;
+
     return (
         <div className="chart-container">
-            {lineChart}
+            {country ? barChart : lineChart}
         </div>
     );
 }

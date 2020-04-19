@@ -60,7 +60,9 @@ const SelectionTabs = () => {
     };
 
     const handleCountryChange = async (country) => {
-        setData(await fetchCntryData(country));
+        const retrievedData = await fetchCntryData(country);
+        setData(retrievedData);
+        setGraphData(retrievedData);
         setCountry(country);
     }
 

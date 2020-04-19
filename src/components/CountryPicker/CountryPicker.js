@@ -19,7 +19,7 @@ const CountryPicker = ({ handleCountryChange, value, index }) => {
     if (value !== index) return null;
 
     const cntryLst = countries ?
-        countries.map((country, i) => <option value={country.iso3} key={i}>{country.name}</option>)
+        countries.map((country, i) => <option value={country.name} key={i}>{country.name}</option>)
         : null;
 
     return (
