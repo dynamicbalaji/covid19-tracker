@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Paper, makeStyles, Typography } from '@material-ui/core';
+import CountUp from 'react-countup';
 
 import './DataTable.css';
 import { getComparator, stableSort } from '../../utils';
@@ -59,10 +60,21 @@ const DataTable = ({ data, value, index }) => {
                         <TableCell component="th" scope="row" className="table-cell">
                             {stateName}
                         </TableCell>
-                        <TableCell align="right" className="table-cell">{confirmed}</TableCell>
-                        <TableCell align="right" className="table-cell">{active}</TableCell>
+                        <TableCell align="right" className="table-cell">
+                            <CountUp start={0} end={confirmed} duration={2.5} separator="," />
+                        </TableCell>
+                        <TableCell align="right" className="table-cell">
+                            <CountUp start={0} end={active} duration={2.5} separator="," />
+                        </TableCell>
+                        <TableCell align="right" className="table-cell">
+                            <CountUp start={0} end={recovered} duration={2.5} separator="," />
+                        </TableCell>
+                        <TableCell align="right" className="table-cell">
+                            <CountUp start={0} end={deaths} duration={2.5} separator="," />
+                        </TableCell>
+                        {/* <TableCell align="right" className="table-cell">{active}</TableCell>
                         <TableCell align="right" className="table-cell">{recovered}</TableCell>
-                        <TableCell align="right" className="table-cell">{deaths}</TableCell>
+                        <TableCell align="right" className="table-cell">{deaths}</TableCell> */}
                     </TableRow>
                 )
             });
