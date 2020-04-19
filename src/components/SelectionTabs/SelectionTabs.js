@@ -5,12 +5,14 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
 import Chart from '../Chart/Chart';
-import {fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData} from '../../api';
+import CountryPicker from '../CountryPicker/CountryPicker';
+import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchData } from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
     const [data, setData] = useState([]);
     const [graphData, setGraphData] = useState([]);
+    const [country, setCountry] = useState('');
     // const theme = useTheme();
 
     useEffect(() => {
@@ -26,7 +28,7 @@ const SelectionTabs = () => {
 
     const handleChange = (event, newVal) => {
         setValue(newVal);
-        if(newVal === 0) {
+        if (newVal === 0) {
             const fetchData = async () => {
                 setData(await fetchTNData());
             }
@@ -35,7 +37,7 @@ const SelectionTabs = () => {
                 setGraphData(await fetchTNGraphData());
             }
             fetchGraphData();
-        } else if(newVal === 1) {
+        } else if (newVal === 1) {
             const fetchData = async () => {
                 setData(await fetchIndiaData());
             }
@@ -46,6 +48,11 @@ const SelectionTabs = () => {
             fetchGraphData();
         }
     };
+
+    const handleCountryChange = async (country) => {
+        setData(await fetchData(country));
+        setCountry(country);
+    }
 
     return (
         <div className="tab-container">
@@ -68,11 +75,11 @@ const SelectionTabs = () => {
                 onChangeIndex={handleChange}
                 className="swipe"
             > */}
-                <DataTable value={value} index={0} data={data} />
-                <Chart value={value} index={0} graphData={graphData} />
-                <DataTable value={value} index={1} data={data} />
-                <Chart value={value} index={1} graphData={graphData} />
-                <DataTable value={value} index={2} data={data} />
+            <DataTable value={value} index={0} data={data} />
+            <Chart value={value} index={0} graphData={graphData} />
+            <DataTable value={value} index={1} data={data} />
+            <Chart value={value} index={1} graphData={graphData} />
+            <CountryPicker handleCountryChange={handleCountryChange} value={value} index={2} />
             {/* </SwipeableViews> */}
         </div>
     );
