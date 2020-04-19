@@ -1,68 +1,72 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# COVID-19 Tracker
 
-## Available Scripts
+This tracker aims to show the numbers & trends of people affected, recovered and deceased due to COVID-19 - Data classified under 3 categories.
 
-In the project directory, you can run:
+* Tamil Nadu (All Districts)
+* India (All States/UTs)
+* World (All Countries)
 
-### `npm start`
+[Live Demo](https://covid19trackerbk.netlify.app/)
+---
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies used 🛠️
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [React](https://es.reactjs.org/) - Front-End JavaScript library
+- [Material UI](https://material-ui.com/) - React UI Framework
+- [Chart.js](https://www.chartjs.org/) - HTML5 Charts
+- [Axios](https://github.com/axios/axios) - Promise based HTTP client
+---
 
-### `npm test`
+## Prerequisites 📋
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+node@v10.16.0 or higher
+npm@6.9.0 or higher
+git@2.17.1 or higher
+```
+---
 
-### `npm run build`
+## Development
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To setup the app for development on your local machine, please follow the instructions below:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+1. Clone the repo to your machine
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/dynamicbalaji/covid19-tracker.git
+```
 
-### `npm run eject`
+2. Install necessary packages
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Start the development environment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+4. Visit http://localhost:3000
+---
 
-## Learn More
+## Data Source
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Data is fetched from different sources as given below.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Category   | API URL                                                             |
+| -----------| ------------------------------------------------------------------- |
+| Tamil Nadu | https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services  |
+| India      | https://api.covid19india.org/                                       |
+| World      | https://covid19.mathdro.id/api/                                     |
+---
 
-### Code Splitting
+## Deployment Status
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bd42aef8-0396-4a33-9169-2b4888f72696/deploy-status)](https://app.netlify.com/sites/covid19trackerbk/deploys)
+---
 
-### Analyzing the Bundle Size
+## License 📄
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
