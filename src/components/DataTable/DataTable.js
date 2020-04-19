@@ -82,7 +82,7 @@ const DataTable = ({ data, value, index }) => {
             <Paper className="paper" elevation={3}>
                 {lastUpdatedSec}
                 <TableContainer>
-                    <Table size='small'>
+                    <Table size='small' stickyHeader >
                         <TableHead>
                             <TableRow>
                                 {headCells.map((headCell) => (
