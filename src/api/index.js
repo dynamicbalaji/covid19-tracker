@@ -90,14 +90,14 @@ export const fetchIndiaGraphData = async () => {
     }
 }
 
-export const fetchData = async (country) => {
+export const fetchCntryData = async (country) => {
     let changeableUrl = !country ? cntryApiUrl : `${cntryApiUrl}/countries/${country}`;
     try {
         const { data: { confirmed, recovered, deaths, lastUpdate } } = await axios.get(changeableUrl);
 
         return { confirmed, recovered, deaths, lastUpdate };
     } catch (error) {
-        console.log("fetchData -> error", error)
+        console.log("fetchCntryData -> error", error)
     }
 }
 
