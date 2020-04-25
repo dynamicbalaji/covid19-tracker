@@ -140,10 +140,18 @@ export const fetchCountries = async () => {
 
 export const fetchTNTotCnt = async () => {
     try {
-        // const {data: {countries}} = await axios.get(`${cntryApiUrl}/countries`);
-        const data = {confirmed: 1821, deltaConfirmed: 66, recovered: 960, deltaRecovered: 94};
-        return data;
+        const {data : {statewise}}  = await axios.get(`${apiUrl}/data.json`);
+        const { confirmed, recovered,
+            deaths, deltaconfirmed, deltadeaths, deltarecovered} = statewise.find((a, b) => a.state==='Tamil Nadu');
+        return {
+            confirmed: {value: parseInt(confirmed)},
+            recovered: {value: parseInt(recovered)},
+            deaths: {value: parseInt(deaths)},
+            deltaconfirmed: parseInt(deltaconfirmed),
+            deltarecovered: parseInt(deltarecovered),
+            deltadeaths: parseInt(deltadeaths),
+        }
     } catch (error) {
-        console.log("fetchCountries -> error", error)
+        console.log("fetchTNTotCnt -> error", error)
     }
 }

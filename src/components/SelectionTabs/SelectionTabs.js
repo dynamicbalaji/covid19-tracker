@@ -7,13 +7,15 @@ import DataTable from '../DataTable/DataTable';
 import Chart from '../Chart/Chart';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Cards from '../Cards/Cards';
-import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchCntryData, fetchDailyData } from '../../api';
+import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, 
+            fetchCntryData, fetchDailyData, fetchTNTotCnt } from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
     const [data, setData] = useState([]);
     const [graphData, setGraphData] = useState([]);
     const [country, setCountry] = useState('');
+    const [tnTotCnt, setTnTotCnt] = useState({});
     // const theme = useTheme();
 
     useEffect(() => {
@@ -25,6 +27,10 @@ const SelectionTabs = () => {
             setGraphData(await fetchTNGraphData());
         }
         fetchGraphData();
+        const fetchTNTotCntData = async () => {
+            setTnTotCnt(await fetchTNTotCnt());
+        }
+        fetchTNTotCntData();
     }, []);
 
     const handleChange = (event, newVal) => {
@@ -39,6 +45,10 @@ const SelectionTabs = () => {
                 setGraphData(await fetchTNGraphData());
             }
             fetchGraphData();
+            const fetchTNTotCntData = async () => {
+                setTnTotCnt(await fetchTNTotCnt());
+            }
+            fetchTNTotCntData();
         } else if (newVal === 1) {
             const fetchData = async () => {
                 setData(await fetchIndiaData());
@@ -88,6 +98,7 @@ const SelectionTabs = () => {
                 onChangeIndex={handleChange}
                 className="swipe"
             > */}
+            <Cards data={tnTotCnt} value={value} index={0} />
             <DataTable value={value} index={0} data={data} />
             <Chart value={value} index={0} graphData={graphData} />
             <Cards data={data} value={value} index={1} />
