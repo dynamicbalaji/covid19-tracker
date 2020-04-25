@@ -10,8 +10,19 @@
     color: rgb(108, 117, 125);
 }
 
-.delta-data-icon {
+.delta-data-icon-small {
     margin-bottom: -3.5% !important;
+}
+
+.delta-data-icon-med {
+    margin-bottom: -1% !important;
+}
+
+.delta-data-small {
+    font-size: 1vw !important;
+}
+.delta-data-med {
+    font-size: 1.3vw !important;
 }
 
 @media only screen and (max-width: 770px) {
@@ -19,9 +30,12 @@
         font-size: 2.4vw !important;
     }
     .delta-data-med {
-        font-size: 4.4vw !important;
+        font-size: 3.6vw !important;
     }
-    .delta-data-icon {
+    .delta-data-icon-small {
         margin-bottom: -2% !important;
+    }
+    .delta-data-icon-med {
+        /* margin-bottom: -2% !important; */
     }
 }

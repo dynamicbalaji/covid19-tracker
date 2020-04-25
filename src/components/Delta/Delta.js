@@ -7,7 +7,7 @@ const Delta = ({ inpCnt, color, size }) => {
     return (
         <>
             <span className={`delta-data-${color} delta-data-${size}`}>
-                <EjectRoundedIcon fontSize="small" className={`delta-data-${size} delta-data-icon`} />{inpCnt}{' '}
+                <EjectRoundedIcon fontSize="small" className={`delta-data-${size} delta-data-icon-${size}`} />{inpCnt}{' '}
             </span>
         </>
     );

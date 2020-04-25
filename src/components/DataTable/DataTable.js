@@ -32,6 +32,7 @@ const DataTable = ({ data, value, index }) => {
     if (index === 1) {
         firstLabel = 'State/UT';
         lastUpdate = '';
+        data = data && data.stateData ? data.stateData : [];
     } else if (index === 2) {
         firstLabel = 'Country';
         lastUpdate = '';

@@ -68,7 +68,19 @@ export const fetchIndiaData = async () => {
                     lastUpdated: lastupdatedtime
                 }
             });
-        return stateData;
+        const totData = statewise.filter((a, b) => a.state==='Total')
+            .map(({  confirmed, recovered,
+                deaths, deltaconfirmed, deltadeaths, deltarecovered}) => {
+                    return {
+                        confirmed: {value: parseInt(confirmed)},
+                        recovered: {value: parseInt(recovered)},
+                        deaths: {value: parseInt(deaths)},
+                        deltaconfirmed: parseInt(deltaconfirmed),
+                        deltarecovered: parseInt(deltarecovered),
+                        deltadeaths: parseInt(deltadeaths),
+                    }
+                });
+        return { stateData, totData };
     } catch (error) {
         console.log("fetchTNData -> error", error);
     }

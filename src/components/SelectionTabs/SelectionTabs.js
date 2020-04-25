@@ -90,6 +90,7 @@ const SelectionTabs = () => {
             > */}
             <DataTable value={value} index={0} data={data} />
             <Chart value={value} index={0} graphData={graphData} />
+            <Cards data={data} value={value} index={1} />
             <DataTable value={value} index={1} data={data} />
             <Chart value={value} index={1} graphData={graphData} />
             <CountryPicker handleCountryChange={handleCountryChange} value={value} index={2} />
