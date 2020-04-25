@@ -1,0 +1,27 @@
+.delta-data-green {
+    color: green;
+}
+
+.delta-data-red {
+    color: red;
+}
+
+.delta-data-grey {
+    color: rgb(108, 117, 125);
+}
+
+.delta-data-icon {
+    margin-bottom: -3.5% !important;
+}
+
+@media only screen and (max-width: 770px) {
+    .delta-data-small {
+        font-size: 2.4vw !important;
+    }
+    .delta-data-med {
+        font-size: 4.4vw !important;
+    }
+    .delta-data-icon {
+        margin-bottom: -2% !important;
+    }
+}

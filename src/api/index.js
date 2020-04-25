@@ -55,13 +55,16 @@ export const fetchIndiaData = async () => {
         const stateData = statewise.filter((a, b) => a.state!=='Total')
             .sort((a, b) => parseInt(b.confirmed) - parseInt(a.confirmed))
             .map(({ state, confirmed, active, recovered,
-                deaths, lastupdatedtime}) => {
+                deaths, lastupdatedtime, deltaconfirmed, deltadeaths, deltarecovered}) => {
                 return {
                     stateName: state,
                     confirmed: parseInt(confirmed),
                     active: parseInt(active),
                     recovered: parseInt(recovered),
                     deaths: parseInt(deaths),
+                    deltaconfirmed: parseInt(deltaconfirmed),
+                    deltarecovered: parseInt(deltarecovered),
+                    deltadeaths: parseInt(deltadeaths),
                     lastUpdated: lastupdatedtime
                 }
             });
@@ -118,6 +121,16 @@ export const fetchCountries = async () => {
     try {
         const {data: {countries}} = await axios.get(`${cntryApiUrl}/countries`);
         return countries;
+    } catch (error) {
+        console.log("fetchCountries -> error", error)
+    }
+}
+
+export const fetchTNTotCnt = async () => {
+    try {
+        // const {data: {countries}} = await axios.get(`${cntryApiUrl}/countries`);
+        const data = {confirmed: 1821, deltaConfirmed: 66, recovered: 960, deltaRecovered: 94};
+        return data;
     } catch (error) {
         console.log("fetchCountries -> error", error)
     }

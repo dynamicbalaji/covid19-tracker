@@ -4,6 +4,7 @@ import CountUp from 'react-countup';
 
 import './DataTable.css';
 import { getComparator, stableSort } from '../../utils';
+import Delta from '../Delta/Delta';
 
 const useStyles = makeStyles((theme) => ({
     visuallyHidden: {
@@ -53,7 +54,8 @@ const DataTable = ({ data, value, index }) => {
             </TableCell>
         </TableRow>) :
         stableSort(data, getComparator(order, orderBy))
-            .map(({ stateName, confirmed, active, recovered, deaths, lastUpdated }) => {
+            .map(({ stateName, confirmed, active, recovered, deaths, lastUpdated, 
+                    deltaconfirmed, deltadeaths, deltarecovered }) => {
                 if (!lastUpdate) lastUpdate = lastUpdated;
                 return (
                     <TableRow key={stateName} hover>
@@ -61,15 +63,18 @@ const DataTable = ({ data, value, index }) => {
                             {stateName}
                         </TableCell>
                         <TableCell align="right" className="table-cell">
+                            {deltaconfirmed > 0 ? <Delta inpCnt={deltaconfirmed} color='red' size='small'/> : null}
                             <CountUp start={0} end={confirmed ? confirmed : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
                             <CountUp start={0} end={active ? active : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
+                            {deltarecovered > 0 ? <Delta inpCnt={deltarecovered} color='green' size='small'/> : null}
                             <CountUp start={0} end={recovered ? recovered : 0} duration={2.5} separator="," />
                         </TableCell>
                         <TableCell align="right" className="table-cell">
+                            {deltadeaths > 0 ? <Delta inpCnt={deltadeaths} color='grey' size='small'/> : null}
                             <CountUp start={0} end={deaths ? deaths : 0} duration={2.5} separator="," />
                         </TableCell>
                         {/* <TableCell align="right" className="table-cell">{active}</TableCell>
