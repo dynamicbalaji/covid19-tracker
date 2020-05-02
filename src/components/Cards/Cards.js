@@ -44,7 +44,7 @@ const Cards = ({ data, value, index }) => {
                 </Grid>
                 <Grid item component={Card} xs={3} md={3} className="card-card card-deaths">
                     <CardContent align='center'>
-                        <Typography color="textSecondary" gutterBottom className="card-heading">Deaths</Typography>
+                        <Typography color="textSecondary" gutterBottom className="card-heading">Deceased</Typography>
                         <Typography variant="h5" className="card-curdata">
                             <CountUp start={0} end={deaths.value} duration={2.5} separator="," />
                         </Typography>

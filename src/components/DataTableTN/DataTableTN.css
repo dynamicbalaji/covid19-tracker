@@ -1,0 +1,50 @@
+.datatable-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.paper {
+    width: 70%;
+    /* margin-left: 1%; */
+}
+
+.t-head {
+    font-weight: bold;
+}
+
+.zone-red {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.zone-orange {
+    background-color: rgba(255, 174, 0, 0.74);
+}
+
+.zone-green {
+    background-color: rgba(0, 255, 0, 0.678);
+}
+
+@media only screen and (max-width: 770px) {
+    .datatable-container{
+        font-size: 40px !important;
+        /* margin-left: 2%; */
+    }
+    .paper{
+        width: 100%;
+    }
+    .table-cell {
+        padding-left: 0.025vw !important;
+        padding-right: 0.025vw !important;
+        font-size: 2.40vw !important;
+    }
+    .t-head {
+        font-size: 2.40vw !important;
+    }
+    .days-since {
+        padding-left:
+    }
+}

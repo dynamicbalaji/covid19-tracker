@@ -155,3 +155,49 @@ export const fetchTNTotCnt = async () => {
         console.log("fetchTNTotCnt -> error", error)
     }
 }
+
+export const fetchTNDataNew = async () => {
+    try {
+        const { data: {features} } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/TN_District_Points_COVID19_Details/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=json&token=`);
+        const stateData = features.filter((a, b) => a.attributes.District_Name!=='All Districts')
+            .sort((a, b) => b.attributes.Positive_T - a.attributes.Positive_T)
+            .map(({ attributes: { District_Name, Positive_T, Active_T, Discharge_T,
+                Death_T, Days_Since_Last_Positive_Reported, Pos_24, Act_24, Dis_24, Dea_24, Zone_by_Central_Government } }) => {
+                return {
+                    stateName: District_Name,
+                    confirmed: Positive_T,
+                    active: Active_T,
+                    recovered: Discharge_T,
+                    deaths: Death_T,
+                    deltaconfirmed: Pos_24,
+                    deltaactive: Act_24,
+                    deltarecovered: Dis_24,
+                    deltadeaths: Dea_24,
+                    cgZone: Zone_by_Central_Government,
+                    daysSince: Days_Since_Last_Positive_Reported
+                }
+            });
+        return stateData;
+    } catch (error) {
+        console.log("fetchTNDataNew -> error", error);
+    }
+}
+
+export const fetchTNTotCntNew = async () => {
+    try {
+        const { data: { features } } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/TN_District_Points_COVID19_Details/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=json&token=`);
+
+        const {attributes : {  Positive_T, Discharge_T,
+            Death_T, Pos_24, Dis_24, Dea_24}} = features.find((a, b) => a.attributes.District_Name==='All Districts');
+        return {
+            confirmed: {value: parseInt(Positive_T)},
+            recovered: {value: parseInt(Discharge_T)},
+            deaths: {value: parseInt(Death_T)},
+            deltaconfirmed: Pos_24,
+            deltarecovered: Dis_24,
+            deltadeaths: Dea_24,
+        }
+    } catch (error) {
+        console.log("fetchTNTotCntNew -> error", error);
+    }
+}

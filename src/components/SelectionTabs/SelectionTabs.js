@@ -4,11 +4,12 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
+import DataTableTN from '../DataTableTN/DataTableTN';
 import Chart from '../Chart/Chart';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Cards from '../Cards/Cards';
-import { fetchTNData, fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, 
-            fetchCntryData, fetchDailyData, fetchTNTotCnt } from '../../api';
+import { fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchTNTotCntNew,
+            fetchCntryData, fetchDailyData, fetchTNDataNew } from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(0);
@@ -20,7 +21,7 @@ const SelectionTabs = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(await fetchTNData());
+            setData(await fetchTNDataNew());
         }
         fetchData();
         const fetchGraphData = async () => {
@@ -28,7 +29,7 @@ const SelectionTabs = () => {
         }
         fetchGraphData();
         const fetchTNTotCntData = async () => {
-            setTnTotCnt(await fetchTNTotCnt());
+            setTnTotCnt(await fetchTNTotCntNew());
         }
         fetchTNTotCntData();
     }, []);
@@ -38,7 +39,7 @@ const SelectionTabs = () => {
         setCountry('');
         if (newVal === 0) {
             const fetchData = async () => {
-                setData(await fetchTNData());
+                setData(await fetchTNDataNew());
             }
             fetchData();
             const fetchGraphData = async () => {
@@ -46,7 +47,7 @@ const SelectionTabs = () => {
             }
             fetchGraphData();
             const fetchTNTotCntData = async () => {
-                setTnTotCnt(await fetchTNTotCnt());
+                setTnTotCnt(await fetchTNTotCntNew());
             }
             fetchTNTotCntData();
         } else if (newVal === 1) {
@@ -99,7 +100,7 @@ const SelectionTabs = () => {
                 className="swipe"
             > */}
             <Cards data={tnTotCnt} value={value} index={0} />
-            <DataTable value={value} index={0} data={data} />
+            <DataTableTN value={value} index={0} data={data} />
             <Chart value={value} index={0} graphData={graphData} />
             <Cards data={data} value={value} index={1} />
             <DataTable value={value} index={1} data={data} />
