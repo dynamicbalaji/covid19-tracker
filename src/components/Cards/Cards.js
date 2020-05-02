@@ -18,7 +18,7 @@ const Cards = ({ data, value, index }) => {
     }
 
     const lastUpdated = (index === 2 || index === 0) ? (<Typography variant="caption" display="block" align='center'>
-            Last Updated at {new Date(lastUpdate).toLocaleString()}
+            Last Updated at {new Date(lastUpdate).toLocaleString()} IST
         </Typography>) : null;
     return (
         <div className="card-container">

@@ -86,7 +86,7 @@ const DataTable = ({ data, value, index }) => {
             });
 
     const lastUpdatedSec = lastUpdate ? (<Typography variant="caption" display="block" align='center'>
-        Last Updated at {lastUpdate}
+        Last Updated at {lastUpdate} IST
     </Typography>) : null;
 
     const handleSort = (property) => (event) => {
