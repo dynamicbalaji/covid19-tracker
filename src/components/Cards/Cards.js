@@ -17,13 +17,13 @@ const Cards = ({ data, value, index }) => {
                 </Typography>);
     }
 
-    const lastUpdated = index === 2 ? (<Typography variant="caption" display="block" align='center'>
+    const lastUpdated = (index === 2 || index === 0) ? (<Typography variant="caption" display="block" align='center'>
             Last Updated at {new Date(lastUpdate).toLocaleString()}
         </Typography>) : null;
     return (
         <div className="card-container">
             {lastUpdated}
-            <Grid container spacing={3} justify="center">
+            <Grid container spacing={3} justify="center" className="grid-container">
                 <Grid item component={Card} xs={3} md={3} className="card-card card-infected">
                     <CardContent align='center' className="card-content">
                         <Typography color="textSecondary" gutterBottom className="card-heading">Confirmed</Typography>

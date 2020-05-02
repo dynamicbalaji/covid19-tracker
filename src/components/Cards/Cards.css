@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.grid-container {
+    margin-top: 0.01vh !important;
+}
+
 .card-card {
     margin: 2% 2% !important;
 }

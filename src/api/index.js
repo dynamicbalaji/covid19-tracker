@@ -188,7 +188,7 @@ export const fetchTNTotCntNew = async () => {
         const { data: { features } } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/TN_District_Points_COVID19_Details/FeatureServer/0/query?where=1%3D1&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=*&returnGeometry=true&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=json&token=`);
 
         const {attributes : {  Positive_T, Discharge_T,
-            Death_T, Pos_24, Dis_24, Dea_24}} = features.find((a, b) => a.attributes.District_Name==='All Districts');
+            Death_T, Pos_24, Dis_24, Dea_24, Last_Positive_Reported_Date}} = features.find((a, b) => a.attributes.District_Name==='All Districts');
         return {
             confirmed: {value: parseInt(Positive_T)},
             recovered: {value: parseInt(Discharge_T)},
@@ -196,8 +196,27 @@ export const fetchTNTotCntNew = async () => {
             deltaconfirmed: Pos_24,
             deltarecovered: Dis_24,
             deltadeaths: Dea_24,
+            lastUpdate: new Date(Last_Positive_Reported_Date).toLocaleString()
         }
     } catch (error) {
         console.log("fetchTNTotCntNew -> error", error);
+    }
+}
+
+export const fetchTNGraphDataNew = async () => {
+    try {
+        const { data: { features } } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/DayWise_mediaBulletinDetails/FeatureServer/0/query?where=1%3D1&objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&sqlFormat=none&f=json&token=`);
+        const graphData = features
+            .map(({ attributes: { Date: dt, Positive, Discharge, Death } }) => {
+                return {
+                    date: new Date(dt).toLocaleDateString(),
+                    confirmed: Positive,
+                    recovered: Discharge,
+                    deaths: Death,
+                }
+            });
+        return graphData;
+    } catch (error) {
+        console.log("fetchTNGraphDataNew -> error", error);
     }
 }
