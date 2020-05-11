@@ -7,7 +7,7 @@ const Chart = ({ graphData, value, index, country }) => {
     
     if(value !== index) return null;
 
-    let dataset = [], title = '', isGraphDataArr = Array.isArray(graphData);
+    let dataset = [], title = '', isGraphDataArr = graphData && Array.isArray(graphData);
 
     // if(index === 0) {
     //     dataset = [{
@@ -62,7 +62,7 @@ const Chart = ({ graphData, value, index, country }) => {
     }
 
     const lineChart = (
-        graphData[0] ?
+        graphData && graphData[0] ?
             <Line data={{
                 labels: graphData.map(({ date }) => date),
                 datasets: dataset
@@ -72,7 +72,7 @@ const Chart = ({ graphData, value, index, country }) => {
             }}/> : null
     );
 
-    const barChart = graphData.confirmed ?
+    const barChart = graphData && graphData.confirmed ?
         <Bar
             data={{
                 labels: ['Confirmed', 'Recovered', 'Deceased'],
