@@ -8,7 +8,7 @@ import DataTableTN from '../DataTableTN/DataTableTN';
 import Chart from '../Chart/Chart';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Cards from '../Cards/Cards';
-import { fetchTNGraphDataNew, fetchIndiaData, fetchIndiaGraphData, fetchTNTotCntNew,
+import { fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchTNTotCntNew,
             fetchCntryData, fetchDailyData, fetchTNDataNew } from '../../api';
 
 const SelectionTabs = () => {
@@ -25,7 +25,7 @@ const SelectionTabs = () => {
         }
         fetchData();
         const fetchGraphData = async () => {
-            setGraphData(await fetchTNGraphDataNew());
+            setGraphData(await fetchTNGraphData());
         }
         fetchGraphData();
         const fetchTNTotCntData = async () => {
@@ -43,7 +43,7 @@ const SelectionTabs = () => {
             }
             fetchData();
             const fetchGraphData = async () => {
-                setGraphData(await fetchTNGraphDataNew());
+                setGraphData(await fetchTNGraphData());
             }
             fetchGraphData();
             const fetchTNTotCntData = async () => {
