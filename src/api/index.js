@@ -39,7 +39,7 @@ export const fetchTNGraphData = async () => {
     try {
         const { data: { features } } = await axios.get(`https://services9.arcgis.com/HwXIp55hAoiv6DE9/ArcGIS/rest/services/TN_Covid_Date_Wise_PositiveCases/FeatureServer/0/query?where=1%3D1&
         objectIds=&time=&resultType=none&outFields=*&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&
-        returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&
+        returnDistinctValues=false&cacheHint=false&orderByFields=Date&groupByFieldsForStatistics=&outStatistics=&having=&
         resultOffset=&resultRecordCount=&sqlFormat=none&f=json&token=`);
         const graphData = features.map(({ attributes: { Date: dt, Positive_Cases } }) => ({ date: new Date(dt).toLocaleDateString(), confirmed: Positive_Cases }));
         return graphData;
