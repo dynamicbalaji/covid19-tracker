@@ -4,19 +4,18 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 
 import './SelectionTabs.css';
 import DataTable from '../DataTable/DataTable';
-import DataTableTN from '../DataTableTN/DataTableTN';
 import Chart from '../Chart/Chart';
 import CountryPicker from '../CountryPicker/CountryPicker';
 import Cards from '../Cards/Cards';
-import { fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchTNTotCntNew,
-            fetchCntryData, fetchDailyData, fetchTNDataNew } from '../../api';
+import { fetchIndiaData, fetchIndiaGraphData, 
+            fetchCntryData, fetchDailyData } from '../../api';
 
 const SelectionTabs = () => {
     const [value, setValue] = useState(1);
     const [data, setData] = useState([]);
     const [graphData, setGraphData] = useState([]);
     const [country, setCountry] = useState('');
-    const [tnTotCnt, setTnTotCnt] = useState({});
+    // const [tnTotCnt, setTnTotCnt] = useState({});
     // const theme = useTheme();
 
     useEffect(() => {
@@ -46,18 +45,18 @@ const SelectionTabs = () => {
         setValue(newVal);
         setCountry('');
         if (newVal === 0) {
-            const fetchData = async () => {
+            /*const fetchData = async () => {
                 setData(await fetchTNDataNew());
             }
-            // fetchData();
+            fetchData();
             const fetchGraphData = async () => {
                 setGraphData(await fetchTNGraphData());
             }
-            // fetchGraphData();
+            fetchGraphData();
             const fetchTNTotCntData = async () => {
                 setTnTotCnt(await fetchTNTotCntNew());
             }
-            // fetchTNTotCntData();
+            fetchTNTotCntData();*/
         } else if (newVal === 1) {
             const fetchData = async () => {
                 setData(await fetchIndiaData());
@@ -107,7 +106,7 @@ const SelectionTabs = () => {
                 onChangeIndex={handleChange}
                 className="swipe"
             > */}
-            <Cards data={tnTotCnt} value={value} index={0} />
+            {/* <Cards data={tnTotCnt} value={value} index={0} /> */}
             {/* <DataTableTN value={value} index={0} data={data} /> */}
             <Chart value={value} index={0} graphData={graphData} />
             <Cards data={data} value={value} index={1} />
