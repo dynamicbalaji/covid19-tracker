@@ -12,7 +12,7 @@ import { fetchTNGraphData, fetchIndiaData, fetchIndiaGraphData, fetchTNTotCntNew
             fetchCntryData, fetchDailyData, fetchTNDataNew } from '../../api';
 
 const SelectionTabs = () => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(1);
     const [data, setData] = useState([]);
     const [graphData, setGraphData] = useState([]);
     const [country, setCountry] = useState('');
@@ -20,7 +20,7 @@ const SelectionTabs = () => {
     // const theme = useTheme();
 
     useEffect(() => {
-        const fetchData = async () => {
+        /*const fetchData = async () => {
             setData(await fetchTNDataNew());
         }
         fetchData();
@@ -31,7 +31,15 @@ const SelectionTabs = () => {
         const fetchTNTotCntData = async () => {
             setTnTotCnt(await fetchTNTotCntNew());
         }
-        fetchTNTotCntData();
+        fetchTNTotCntData();*/
+        const fetchData = async () => {
+            setData(await fetchIndiaData());
+        }
+        fetchData();
+        const fetchGraphData = async () => {
+            setGraphData(await fetchIndiaGraphData());
+        }
+        fetchGraphData();
     }, []);
 
     const handleChange = (event, newVal) => {
@@ -41,15 +49,15 @@ const SelectionTabs = () => {
             const fetchData = async () => {
                 setData(await fetchTNDataNew());
             }
-            fetchData();
+            // fetchData();
             const fetchGraphData = async () => {
                 setGraphData(await fetchTNGraphData());
             }
-            fetchGraphData();
+            // fetchGraphData();
             const fetchTNTotCntData = async () => {
                 setTnTotCnt(await fetchTNTotCntNew());
             }
-            fetchTNTotCntData();
+            // fetchTNTotCntData();
         } else if (newVal === 1) {
             const fetchData = async () => {
                 setData(await fetchIndiaData());
@@ -100,7 +108,7 @@ const SelectionTabs = () => {
                 className="swipe"
             > */}
             <Cards data={tnTotCnt} value={value} index={0} />
-            <DataTableTN value={value} index={0} data={data} />
+            {/* <DataTableTN value={value} index={0} data={data} /> */}
             <Chart value={value} index={0} graphData={graphData} />
             <Cards data={data} value={value} index={1} />
             <DataTable value={value} index={1} data={data} />
